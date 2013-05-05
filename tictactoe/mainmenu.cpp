@@ -4,11 +4,10 @@ MainMenu::MainMenu()
 {
     createWindow(1, 1, 10, 10);
     options.push_back("PLAY");
-    options.push_back("LOAD");
     options.push_back("QUIT");
     can_go_up = false;
     can_go_down = true;
-    current_pos = 0;
+    current_pos = 1;
     init_pair(2, COLOR_RED, COLOR_BLUE);
 }
 
@@ -54,6 +53,7 @@ menu_opt MainMenu::getOption()
             break;
         }
     }
+    return chosen_opt;
 }
 
 
@@ -78,13 +78,13 @@ void MainMenu::goUp()
 void MainMenu::printOpts()
 {
     werase(menu);
-    for(int i=0; i < options.size(); ++i)
+    for(int i=1; i <= options.size(); ++i)
     {
         if(i == current_pos)
         {
-            mvwprintw(menu, i+2, 1+options[i].length()+1, "<<");
+            mvwprintw(menu, i+2, 1+options[i-1].length()+1, "<<");
         }
-        mvwprintw(menu, i+2, 1, options[i].c_str());
+        mvwprintw(menu, i+2, 1, options[i-1].c_str());
     }
     wrefresh(menu);
 }

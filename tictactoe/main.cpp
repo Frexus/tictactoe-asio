@@ -8,6 +8,11 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    if(argc < 3)
+    {
+        cerr << "Usage: " << argv[0] << " address " << " port " << "\n";
+        return 1;
+    }
     initscr();
     start_color();
     refresh();
@@ -20,5 +25,6 @@ int main(int argc, char* argv[])
     g.run();
 
     endwin();
+    return 0;
 }
 

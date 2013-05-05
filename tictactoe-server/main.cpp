@@ -42,7 +42,6 @@ void session(socket_ptr player1, socket_ptr player2)
             boost::asio::read(*player1, boost::asio::buffer(&msg, sizeof(message)));
             if(msg == SAVE)
             {
-                saves.boards.push_back(b);
                 std::ofstream ofs("saved_state.txt");
                 boost::archive::text_oarchive oa(ofs);
                 oa << b;

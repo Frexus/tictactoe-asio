@@ -1,4 +1,5 @@
 #include "gameclient.h"
+#include <sstream>
 
 GameClient::GameClient(boost::asio::io_service *srv, char* host, char* port)
     :
@@ -104,12 +105,16 @@ void GameClient::printBoard()
 void GameClient::mainLoop()
 {
     connect();
-    mvprintw(LINES-3,0,"Arrow keys to move.\nF4 to save game.\nF6 to load game.");
     board.show();
     //boost::asio::read(socket, boost::asio::buffer(&msg, sizeof(message)));
+    mvprintw(LINES-3,0,"Arrow keys to move.\nF4 to save game.\nF6 to load game.");
     receiveMessage();
     bool turn = msg == GO_FIRST ? 1 : 0;
     bool done = false;
+    if(!turn)
+    {
+        printMessage("Enemy is making move. Please wait.");
+    }
     while(!done)
     {
         if(turn)
@@ -126,6 +131,7 @@ void GameClient::mainLoop()
         }
         else
         {
+            printMessage("Enemy is making move. Please wait.");
             receiveMessage(); // get enemy move
             if(msg == LOAD)
             {

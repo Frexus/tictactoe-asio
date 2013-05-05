@@ -9,7 +9,7 @@ enum message
 
 enum menu_opt
 {
-    MENU_START_GAME, MENU_LOAD_GAME, MENU_QUIT
+    MENU_START_GAME = 1, MENU_QUIT
 };
 
 #endif // MESSAGES_H
